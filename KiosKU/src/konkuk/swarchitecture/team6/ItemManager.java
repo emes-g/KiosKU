@@ -4,20 +4,17 @@ import java.util.ArrayList;
 
 public class ItemManager {
 	private ArrayList<Item> itemList;
-	private int count;
+	public ItemManager() {
+		// 추후 수정
+		itemList = new ArrayList<Item>();
+		itemList.add(new Item("맥주", 3000));
+		itemList.add(new Item("케이크", 25000));
+		itemList.add(new Item("치킨", 20000));
+	}
 	public ArrayList<Item> getItemList() {
 		return itemList;
 	}
-	public ItemManager(ArrayList<Item> itemList, int count) {
-		this.itemList = itemList;
-		this.count = count;
-	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
-	}
+	
 	public boolean addItem(Item item) {
 		// 내부 나중에
 		return true;
