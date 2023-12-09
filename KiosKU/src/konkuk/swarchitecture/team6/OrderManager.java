@@ -37,7 +37,6 @@ public class OrderManager {
 		
 		while(true) {
 			String command;
-			boolean isSuccess = false;
 			
 			System.out.printf("상품 관련 명령 선택 (add, delete, q): ");
 			command = scan.nextLine();
@@ -47,32 +46,34 @@ public class OrderManager {
 				break;
 			}
 			// add or delete
-			String title;
-			Integer count;
-
-			System.out.printf("상품명 : ");
-			title = scan.nextLine();
-			System.out.printf("개수 : ");
-			count = scan.nextInt();
-			clearBuffer();
-
-			for(Item item : iManager.getItemList()) {
-				if(title.equals(item.getTitle())) {
-					if(command.equals("add"))	// 장바구니에 상품 추가
-						basket.addItemToBasket(item, count);
-					else	// 장바구니에서 상품 삭제
-						basket.deleteItemFromBasket(item, count);
-					isSuccess = true;
-					break;
-				}
-			}
-			if(!isSuccess) {
-				System.out.printf("아이템 목록에 %s이(가) 존재하지 않습니다.\n", title);
-			}
+			addOrDeleteItem(basket, command);
 		}
 		// make order
 		orderList.add(basket);
 		basket.printOrderInfo();
+	}
+	
+	public boolean addOrDeleteItem(Order basket, String command) {
+		String title;
+		Integer count;
+
+		System.out.printf("상품명 : ");
+		title = scan.nextLine();
+		System.out.printf("개수 : ");
+		count = scan.nextInt();
+		clearBuffer();
+
+		for(Item item : iManager.getItemList()) {
+			if(title.equals(item.getTitle())) {
+				if(command.equals("add"))	// 장바구니에 상품 추가
+					basket.addItemToBasket(item, count);
+				else	// 장바구니에서 상품 삭제
+					basket.deleteItemFromBasket(item, count);
+				return true;
+			}
+		}
+		System.out.printf("아이템 목록에 %s이(가) 존재하지 않습니다.\n", title);
+		return false;
 	}
 	
 	public void clearBuffer() {
