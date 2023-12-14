@@ -3,7 +3,6 @@ package konkuk.swarchitecture.team6;
 import java.util.ArrayList;
 
 public class CardCompany {
-	// <카드번호, <한도, 현재 사용 금액>>
 	private static ArrayList<CardInformation> CardDatabase = new ArrayList<CardInformation>();
 	
 	public static boolean checkPayable(String insertedCardID, int price) {		
