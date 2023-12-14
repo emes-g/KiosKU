@@ -1,37 +1,33 @@
 package konkuk.swarchitecture.team6;
 
 public class PaymentByCash extends Payment {
-	private int[] insertedCurrency;
-	private int totalInsertedCurrency;
-	private int[] changeCurrency;
+	private Currency insertedCurrency;
+	private Currency change;
 	
-	public PaymentByCash() {
-		super();
-		this.insertedCurrency = new int[8];
-		this.totalInsertedCurrency = 0;
-		this.changeCurrency = new int[8];
+	public PaymentByCash(int price) {
+		super(price);
+		this.insertedCurrency = new Currency();
+		this.change = new Currency();
 	}
 	
-	public PaymentByCash(int totalPrice, boolean payable, boolean successed, 
-			String receiptInfo, int[] insertedCurrency, 
-			int totalInsertedCurrency, int[] changeCurrency) {
-		super(totalPrice, payable, successed, receiptInfo);
-		this.insertedCurrency = insertedCurrency;
-		this.totalInsertedCurrency = totalInsertedCurrency;
-		this.changeCurrency = changeCurrency;
-	}
-
 	@Override
 	public boolean payPreProcessing() {
-		// 추후 구현
-		return false;
+		insertedCurrency.init();
+		if(insertedCurrency.getTotal() < price) {
+			System.out.printf("투입금액이 부족합니다.\n");
+			return false;
+		}
+		else if(!CurrencyManager.checkPayable(insertedCurrency.getTotal() - price, insertedCurrency, change)) {
+			System.out.printf("키오스크에 화폐가 부족합니다.\n");
+			return false;
+		}
+		System.out.printf("선승인 완료 | 선승인 금액 : %d\n", price);
+		return true;
 	}
 
 	@Override
-	public boolean pay() {
-		// 추후 구현
-		return false;
+	public void pay() {
+		CurrencyManager.changeCurrencyReserve(insertedCurrency, change);
+		System.out.printf("결제 완료 | 결제 금액 : %d\n", price);
 	}
-	
-	
 }

@@ -3,9 +3,8 @@ package konkuk.swarchitecture.team6;
 public class PaymentByCashFactory extends PaymentFactory {
 
 	@Override
-	protected Payment createPayment() {
-		// 추후 구현
-		return new PaymentByCash();
+	protected Payment createPayment(int price) {
+		return new PaymentByCash(price);
 	}
 	
 }
