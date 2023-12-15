@@ -1,4 +1,4 @@
-package konkuk.swarchitecture.team6;
+package konkuk.swarchitecture.team6.cli;
 
 public class PaymentByCard extends Payment {
 	private String insertedCardID;

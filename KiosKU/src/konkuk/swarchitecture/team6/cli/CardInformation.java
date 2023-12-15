@@ -1,4 +1,4 @@
-package konkuk.swarchitecture.team6;
+package konkuk.swarchitecture.team6.cli;
 
 public class CardInformation {
 	private String cardID;	// 카드 번호

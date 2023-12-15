@@ -1,4 +1,4 @@
-package konkuk.swarchitecture.team6;
+package konkuk.swarchitecture.team6.cli;
 
 public class Pair<X, Y> {
 	private X x;

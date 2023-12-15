@@ -1,4 +1,4 @@
-package konkuk.swarchitecture.team6;
+package konkuk.swarchitecture.team6.cli;
 
 public abstract class PaymentFactory {
 	public static PaymentFactory getFactory() {
