@@ -26,7 +26,8 @@ public class PaymentByCard extends Payment {
 			System.out.printf("해당 카드로는 결제로 불가능합니다.\n");
 			return false;
 		}
-		System.out.printf("선승인 완료 | 카드 번호 : %s\n", insertedCardID);
+		payable = true;
+		System.out.printf("선승인 완료 | 카드 번호 : %s\n", protectCardInfo(insertedCardID));
 		return true;
 	}
 
@@ -34,13 +35,17 @@ public class PaymentByCard extends Payment {
 	public void pay() {
 		CardCompany.changeCardData(insertedCardID, price);
 		makePaymentInfo();
-		System.out.printf("결제 완료 | 카드 번호 : %s\n", insertedCardID);
+		System.out.printf("결제 완료 | 카드 번호 : %s\n", protectCardInfo(insertedCardID));
 	}
 
 	@Override
 	public void revert(int idx) {
+		if(!payable) {
+			System.out.printf("%d번째 결제자 결제 실패\n", idx + 1);
+			return;
+		}
 		CardCompany.cancelPreAuthorization(insertedCardID, price);
-		System.out.printf("%d번째 결제자의 가승인 취소 | 카드 번호 : %s\n", idx + 1, insertedCardID);
+		System.out.printf("%d번째 결제자의 가승인 취소 | 카드 번호 : %s\n", idx + 1, protectCardInfo(insertedCardID));
 	}
 
 	@Override
