@@ -29,13 +29,15 @@ public class PaymentByCash extends Payment {
 	public void pay() {
 		CurrencyManager.changeCurrencyReserve(insertedCurrency, change);
 		makePaymentInfo();
+		// 거스름돈이 어떻게 구성되어있는지 출력
 		System.out.printf("결제 완료 | 결제 금액 : %d\n", price);
 	}
 	
 	@Override
-	public void revert() {
+	public void revert(int idx) {
 		CurrencyManager.giveBackInsertedCurrency();
-		System.out.printf("가승인 취소 | 취소 금액 : %d\n", price);
+		System.out.printf("%d번째 결제자의 가승인 취소 | 취소 금액 : %d\n", idx + 1, price);
+		insertedCurrency.print();
 	}
 
 	@Override

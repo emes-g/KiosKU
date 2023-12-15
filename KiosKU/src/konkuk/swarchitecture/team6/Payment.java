@@ -15,7 +15,7 @@ public abstract class Payment {
 	
 	public abstract boolean payPreProcessing();
 	public abstract void pay();
-	public abstract void revert();
+	public abstract void revert(int idx);
 	public abstract void makePaymentInfo();
 	
 	public int getPrice() {

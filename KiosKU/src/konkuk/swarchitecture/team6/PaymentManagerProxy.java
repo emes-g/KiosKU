@@ -59,7 +59,7 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 	
 	public void revert(int idx) {
 		for(int i=idx; i>=0; i--)
-			paymentList[i].revert();
+			paymentList[i].revert(i);
 	}
 	
 	public int getTotalPrice() {

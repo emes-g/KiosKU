@@ -38,9 +38,9 @@ public class PaymentByCard extends Payment {
 	}
 
 	@Override
-	public void revert() {
+	public void revert(int idx) {
 		CardCompany.cancelPreAuthorization(insertedCardID, price);
-		System.out.printf("가승인 취소 | 카드 번호 : %s\n", insertedCardID);
+		System.out.printf("%d번째 결제자의 가승인 취소 | 카드 번호 : %s\n", idx + 1, insertedCardID);
 	}
 
 	@Override
