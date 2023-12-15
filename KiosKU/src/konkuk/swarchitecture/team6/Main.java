@@ -7,13 +7,17 @@ public class Main {
 //		Pair<Item, Integer> p2 = new Pair<>(new Item("아이스크림", 500), 4);
 //		p2.print();
 		
-//		ItemManager im = new ItemManager();
-//		OrderManager om = new OrderManager(im);
-//		om.makeOrder();
-		
 		CurrencyManager cm = new CurrencyManager();
-		CardCompany.getCardDatabase().add(new CardInformation("aaaabbbbccccdddd", 2000, 0, 100));
-		PaymentManagerProxy pmProxy = new PaymentManagerProxy(5500, 3);
+		ItemManager im = new ItemManager();
+		
+		OrderManager om = new OrderManager(im);
+		om.makeOrder();
+		
+		CardCompany.getCardDatabase().add(new CardInformation("aaaabbbbccccdddd", 1000000, 0, 100));
+//		PaymentManagerProxy pmProxy = new PaymentManagerProxy(5500);
+		PaymentManagerIF pmProxy = new PaymentManagerProxy(om.getLastOrder().getTotalPrice());
 		pmProxy.pay();
+		ReceiptManager rm = new ReceiptManager(om);
+		rm.makeReceipts(pmProxy);
 	}
 }

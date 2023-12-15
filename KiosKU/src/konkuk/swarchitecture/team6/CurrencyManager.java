@@ -1,9 +1,6 @@
 package konkuk.swarchitecture.team6;
 
-import java.util.Scanner;
-
 public class CurrencyManager {
-	private Scanner scan = new Scanner(System.in);
 	private static Currency currencyReserve = new Currency();
 	private static Currency subCurrencyReserve = new Currency();
 	private static Currency tiedReserve = new Currency();
@@ -28,6 +25,8 @@ public class CurrencyManager {
 				change.getUnits()[i] = cnt;
 			}
 		}
+		subCurrencyReserve.updateTotal();
+		change.updateTotal();
 		if(rest != 0)
 			return false;
 		tiedReserve.add(change);

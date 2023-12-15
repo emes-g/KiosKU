@@ -1,9 +1,6 @@
 package konkuk.swarchitecture.team6;
 
-import java.util.Scanner;
-
 public class PaymentByCard extends Payment {
-	private Scanner scan = new Scanner(System.in);
 	private String insertedCardID;
 	
 	public PaymentByCard(int price) {
@@ -23,7 +20,7 @@ public class PaymentByCard extends Payment {
 		String paymentMethod;
 		
 		System.out.printf("결제 수단 입력 (현금, 카드) : ");
-		paymentMethod = scan.nextLine();
+		paymentMethod = Kiosk.scan.nextLine();
 		
 		return paymentMethod;
 	}
@@ -31,7 +28,7 @@ public class PaymentByCard extends Payment {
 	@Override
 	public boolean payPreProcessing() {
 		System.out.printf("카드 번호 (16자리) : ");
-		insertedCardID = scan.nextLine();
+		insertedCardID = Kiosk.scan.nextLine();
 		
 		if(!CardCompany.checkPayable(insertedCardID, price)) {
 			System.out.printf("해당 카드로는 결제로 불가능합니다.\n");
@@ -44,6 +41,7 @@ public class PaymentByCard extends Payment {
 	@Override
 	public void pay() {
 		CardCompany.changeCardData(insertedCardID, price);
+		makePaymentInfo();
 		System.out.printf("결제 완료 | 카드 번호 : %s\n", insertedCardID);
 	}
 
@@ -51,5 +49,21 @@ public class PaymentByCard extends Payment {
 	public void revert() {
 		CardCompany.cancelPreAuthorization(insertedCardID, price);
 		System.out.printf("가승인 취소 | 카드 번호 : %s\n", insertedCardID);
+	}
+
+	@Override
+	public void makePaymentInfo() {
+		paymentInfo = "<결제 정보>\n";
+		paymentInfo += "결제 방식 : 카드결제\n";
+		paymentInfo += "카드 번호 : " + protectCardInfo(insertedCardID) + "\n";
+		paymentInfo += "결제 금액 : " + price + "\n";
+	}
+	
+	public String protectCardInfo(String cardID) {
+		String protectedCardID = cardID.substring(0, 4);
+		protectedCardID += "********";
+		protectedCardID += cardID.substring(12, 16);
+		
+		return protectedCardID;
 	}
 }

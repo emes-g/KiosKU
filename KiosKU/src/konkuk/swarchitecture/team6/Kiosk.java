@@ -1,8 +1,10 @@
 package konkuk.swarchitecture.team6;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Kiosk {
+	static Scanner scan = new Scanner(System.in);
 	static final int MAX_HEADCOUNT = 6;	// 최대 결제 가능 인원 수
 	static final int MIN_UNIT_COST = 100;	// 상품 최소 금액 단위
 	static final int CURRENCY_NUM = 8;	// 화폐 종류 수 
@@ -11,14 +13,14 @@ public class Kiosk {
 	private Order basket;
 	private ItemManager iManager;
 	private OrderManager oManager;
-	private PaymentManager pManagerProxy;
+	private PaymentManagerIF pManagerProxy;
 	private ReceiptManager rManager;
 	private CurrencyManager cManager;
 	private boolean isManagerMode;
 	private String ownerPW;
 	
 	public Kiosk(ArrayList<String> pList, Order basket, ItemManager iManager, OrderManager oManager, 
-			PaymentManager pManagerProxy, ReceiptManager rManager, CurrencyManager cManager, 
+			PaymentManagerIF pManagerProxy, ReceiptManager rManager, CurrencyManager cManager, 
 			boolean isManagerMode, String ownerPW) {
 		// 키오스크 키면 현금 보유량부터 입력받기
 		this.pList = pList;
@@ -48,7 +50,7 @@ public class Kiosk {
 		return oManager;
 	}
 	
-	public PaymentManager getpManagerProxy() {
+	public PaymentManagerIF getpManagerProxy() {
 		return pManagerProxy;
 	}
 
@@ -78,5 +80,9 @@ public class Kiosk {
 	public boolean setItem(int option) {
 		// 추후 구현
 		return false;
+	}
+	
+	public static void clearBuffer() {
+		scan.nextLine();
 	}
 }

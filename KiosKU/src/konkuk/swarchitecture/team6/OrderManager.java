@@ -1,19 +1,17 @@
 package konkuk.swarchitecture.team6;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class OrderManager {
 	private ArrayList<Order> orderList;
 	private int currentOrderNum;
 	private ItemManager iManager;
-	private Scanner scan;
 	
 	public OrderManager(ItemManager iManager) {
 		this.iManager = iManager; 
 		orderList = new ArrayList<Order>();
+		orderList.add(new Order(0));	// 깡통
 		currentOrderNum = 0;
-		scan = new Scanner(System.in);
 	}
 	public ArrayList<Order> getOrderList() {
 		return orderList;
@@ -31,15 +29,15 @@ public class OrderManager {
 		
 		System.out.printf("%d번째 주문을 시작합니다.\n", currentOrderNum);
 		System.out.printf("매장 식사 | 포장 선택 (true, false): ");
-		forHere = scan.nextBoolean();
-		clearBuffer();
+		forHere = Kiosk.scan.nextBoolean();
+		Kiosk.clearBuffer();
 		basket.selectForHereOrToGo(forHere);
 		
 		while(true) {
 			String command;
 			
 			System.out.printf("상품 관련 명령 선택 (add, delete, q): ");
-			command = scan.nextLine();
+			command = Kiosk.scan.nextLine();
 			// 종료
 			if(command.equals("q")) {
 				System.out.printf("상품 추가 종료\n");
@@ -50,7 +48,7 @@ public class OrderManager {
 		}
 		// make order
 		orderList.add(basket);
-		basket.printOrderInfo();
+//		basket.printOrderInfo();
 	}
 	
 	public boolean addOrDeleteItem(Order basket, String command) {
@@ -58,10 +56,10 @@ public class OrderManager {
 		Integer count;
 
 		System.out.printf("상품명 : ");
-		title = scan.nextLine();
+		title = Kiosk.scan.nextLine();
 		System.out.printf("개수 : ");
-		count = scan.nextInt();
-		clearBuffer();
+		count = Kiosk.scan.nextInt();
+		Kiosk.clearBuffer();
 
 		for(Item item : iManager.getItemList()) {
 			if(title.equals(item.getTitle())) {
@@ -76,7 +74,7 @@ public class OrderManager {
 		return false;
 	}
 	
-	public void clearBuffer() {
-		scan.nextLine();
+	public Order getLastOrder() {
+		return orderList.get(currentOrderNum);
 	}
 }

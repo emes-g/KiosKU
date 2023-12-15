@@ -1,9 +1,6 @@
 package konkuk.swarchitecture.team6;
 
-import java.util.Scanner;
-
 public class Currency {
-	private static Scanner scan = new Scanner(System.in);
 	private int total;
 	private int[] units;
 	
@@ -16,10 +13,10 @@ public class Currency {
 	public void init() {
 		for(int i=0; i<Kiosk.CURRENCY_NUM; i++) {
 			System.out.printf("%d원 개수 : ", Kiosk.UNITS[i]);
-			units[i] = scan.nextInt();	
-			clearBuffer();
-			total += units[i] * Kiosk.UNITS[i];
+			units[i] = Kiosk.scan.nextInt();	
+			Kiosk.clearBuffer();
 		}
+		updateTotal();
 	}
 	
 	public void bzero() {
@@ -66,7 +63,9 @@ public class Currency {
 		return total;
 	}
 	
-	public static void clearBuffer() {
-		scan.nextLine();
+	public void updateTotal() {
+		total = 0;
+		for(int i=0; i<Kiosk.CURRENCY_NUM; i++)
+			total += units[i] * Kiosk.UNITS[i];
 	}
 }

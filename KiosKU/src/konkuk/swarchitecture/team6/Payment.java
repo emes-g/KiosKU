@@ -2,15 +2,15 @@ package konkuk.swarchitecture.team6;
 
 public abstract class Payment {
 	protected int price;	// 1인 부담액
+	protected String paymentInfo;	// 결제 정보
 	private boolean payable;
 	private boolean successed;
-	private String receiptInfo;
 	
 	public Payment(int price) {
 		this.price = price;
 		this.payable = false;
 		this.successed = false;
-		this.receiptInfo = "영수증 정보없음\n";
+		this.paymentInfo = "영수증 정보없음\n";
 	}
 	
 	public int getPrice() {
@@ -37,15 +37,16 @@ public abstract class Payment {
 		this.successed = successed;
 	}
 
-	public String getReceiptInfo() {
-		return receiptInfo;
+	public String getPaymentInfo() {
+		return paymentInfo;
 	}
 
-	public void setReceiptInfo(String receiptInfo) {
-		this.receiptInfo = receiptInfo;
+	public void setPaymentInfo(String paymentInfo) {
+		this.paymentInfo = paymentInfo;
 	}
 
 	public abstract boolean payPreProcessing();
 	public abstract void pay();
 	public abstract void revert();
+	public abstract void makePaymentInfo();
 }

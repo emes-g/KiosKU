@@ -1,10 +1,6 @@
 package konkuk.swarchitecture.team6;
 
-import java.util.Scanner;
-
 public abstract class PaymentFactory {
-	private static Scanner scan = new Scanner(System.in);
-	
 	public static PaymentFactory getFactory() {
 		String paymentMethod = getUserPaymentMethod();
 		
@@ -20,7 +16,7 @@ public abstract class PaymentFactory {
 		String paymentMethod;
 		
 		System.out.printf("결제 수단 입력 (현금, 카드) : ");
-		paymentMethod = scan.nextLine();
+		paymentMethod = Kiosk.scan.nextLine();
 		
 		return paymentMethod;
 	}

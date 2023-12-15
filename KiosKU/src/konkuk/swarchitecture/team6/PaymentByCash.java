@@ -28,6 +28,7 @@ public class PaymentByCash extends Payment {
 	@Override
 	public void pay() {
 		CurrencyManager.changeCurrencyReserve(insertedCurrency, change);
+		makePaymentInfo();
 		System.out.printf("결제 완료 | 결제 금액 : %d\n", price);
 	}
 	
@@ -35,5 +36,14 @@ public class PaymentByCash extends Payment {
 	public void revert() {
 		CurrencyManager.giveBackInsertedCurrency();
 		System.out.printf("가승인 취소 | 취소 금액 : %d\n", price);
+	}
+
+	@Override
+	public void makePaymentInfo() {
+		paymentInfo = "<결제 정보>\n";
+		paymentInfo += "결제 방식 : 현금결제\n";
+		paymentInfo += "투입 금액 : " + insertedCurrency.getTotal() + "\n";
+		paymentInfo += "결제 금액 : " + price + "\n";
+		paymentInfo += " 거스름돈 : " + change.getTotal() + "\n";
 	}
 }

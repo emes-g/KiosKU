@@ -9,7 +9,10 @@ public class PaymentManager implements PaymentManagerIF {
 
 	@Override
 	public void pay() {
-		for(int i=0; i<paymentList.length; i++) 
+		for(int i=0; i<paymentList.length; i++) {
+			if(paymentList[i] == null)
+				return;
 			paymentList[i].pay();
+		}
 	}
 }
