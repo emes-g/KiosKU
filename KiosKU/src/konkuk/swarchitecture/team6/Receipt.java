@@ -1,11 +1,13 @@
 package konkuk.swarchitecture.team6;
 
 public class Receipt {
-	private Order order;
-	private Payment payment;
+	private String receiptInfo;
 	
-	public Receipt(Order order, Payment payment) {
-		this.order = order;
-		this.payment = payment;
+	public Receipt(String receiptInfo) {
+		this.receiptInfo = receiptInfo;
+	}
+
+	public String getReceiptInfo() {
+		return receiptInfo;
 	}
 }
