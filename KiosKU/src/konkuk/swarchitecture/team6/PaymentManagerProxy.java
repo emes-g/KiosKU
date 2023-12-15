@@ -6,27 +6,12 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 	private Payment[] paymentList;
 	private PaymentManager pManager;
 	
-	// 여타 Manager들과 달리 매 주문에서 새로 생성됨
+	// 여타 매니저들과 달리 매 주문에서 새로 생성됨
 	public PaymentManagerProxy(int totalPrice) {
 		this.totalPrice = totalPrice;
 		this.headcount = 0;
 		this.paymentList = new Payment[Kiosk.MAX_HEADCOUNT];
 		this.pManager = new PaymentManager(paymentList);
-	}
-	public int getTotalPrice() {
-		return totalPrice;
-	}
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-	public int getHeadcount() {
-		return headcount;
-	}
-	public void setHeadcount(int headcount) {
-		this.headcount = headcount;
-	}
-	public Payment[] getPaymentList() {
-		return paymentList;
 	}
 	
 	public int[] calculateAmount() {
@@ -49,7 +34,6 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 		return prices;
 	}
 
-	// payPreProcessing 역할 (Kiosk가 호출)
 	public boolean pay() {
 		// 결제 금액 계산
 		int[] prices = calculateAmount();
@@ -76,5 +60,21 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 	public void revert(int idx) {
 		for(int i=idx; i>=0; i--)
 			paymentList[i].revert();
+	}
+	
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public int getHeadcount() {
+		return headcount;
+	}
+	public void setHeadcount(int headcount) {
+		this.headcount = headcount;
+	}
+	public Payment[] getPaymentList() {
+		return paymentList;
 	}
 }

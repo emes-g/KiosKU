@@ -54,18 +54,17 @@ public class Currency {
 		}
 		System.out.println();
 	}
-
-	public int[] getUnits() {
-		return units;
-	}
-
-	public int getTotal() {
-		return total;
-	}
 	
 	public void updateTotal() {
 		total = 0;
 		for(int i=0; i<Kiosk.CURRENCY_NUM; i++)
 			total += units[i] * Kiosk.UNITS[i];
+	}
+
+	public int[] getUnits() {
+		return units;
+	}
+	public int getTotal() {
+		return total;
 	}
 }

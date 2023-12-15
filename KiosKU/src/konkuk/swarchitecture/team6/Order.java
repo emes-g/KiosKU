@@ -17,24 +17,6 @@ public class Order {
 		forHere = false;
 	}
 	
-	public ArrayList<Pair<Item, Integer>> getBasket() {
-		return basket;
-	}
-	public int getTotalCount() {
-		return totalCount;
-	}
-	public int getTotalPrice() {
-		return totalPrice;
-	}
-	public int getOrderNum() {
-		return orderNum;
-	}
-	public boolean isForHere() {
-		return forHere;
-	}
-	public void selectForHereOrToGo(boolean forHere) {
-		this.forHere = forHere;
-	}
 	
 	public void addItemToBasket(Item item, Integer count) {
 		ArrayList<String> names = getItemNameInBasket();
@@ -92,21 +74,25 @@ public class Order {
 		}
 		return -1;
 	}
-	
-//	public void printOrderInfo() {
-//		System.out.printf("===================\n");
-//		System.out.printf("주문번호 : %d\n", orderNum);
-//		System.out.printf("매장 식사 | 포장 (1, 0): %b\n", forHere);
-//		for(Pair<Item, Integer> p : basket) {
-//			System.out.printf("-------------------\n");
-//			System.out.printf("상품 : %s\t가격 : %d\t개수 : %d\n",
-//					p.getX().getTitle(), p.getX().getCost(), p.getY());
-//			System.out.printf("-------------------\n");
-//		}
-//		System.out.printf("총 상품 개수 : %d\n", totalCount);
-//		System.out.printf("총 상품 가격 : %d\n", totalPrice);
-//		System.out.printf("===================\n");
-//	}
+
+	public ArrayList<Pair<Item, Integer>> getBasket() {
+		return basket;
+	}
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public int getOrderNum() {
+		return orderNum;
+	}
+	public boolean isForHere() {
+		return forHere;
+	}
+	public void selectForHereOrToGo(boolean forHere) {
+		this.forHere = forHere;
+	}
 }
 
 

@@ -86,19 +86,15 @@ public class Kiosk {
 	public ItemManager getiManager() {
 		return iManager;
 	}
-
 	public OrderManager getoManager() {
 		return oManager;
 	}
-	
 	public PaymentManagerIF getpManagerProxy() {
 		return pManagerProxy;
 	}
-
 	public ReceiptManager getrManager() {
 		return rManager;
 	}
-	
 	public CurrencyManager getcManager() {
 		return cManager;
 	}

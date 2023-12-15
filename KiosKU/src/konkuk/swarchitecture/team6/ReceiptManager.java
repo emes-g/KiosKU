@@ -11,9 +11,6 @@ public class ReceiptManager {
 		this.oManager = oManager;
 		this.receiptList = new ArrayList<ArrayList<Receipt>>();
 	}
-	public ArrayList<ArrayList<Receipt>> getReceiptList() {
-		return receiptList;
-	}
 	
 	public void makeReceipts(PaymentManagerIF pManager) {
 		this.pManager = (PaymentManagerProxy)pManager;
@@ -51,5 +48,9 @@ public class ReceiptManager {
 	
 	public Receipt getLastReceipt(int idx) {
 		return getLastReceipts().get(idx);
+	}
+	
+	public ArrayList<ArrayList<Receipt>> getReceiptList() {
+		return receiptList;
 	}
 }

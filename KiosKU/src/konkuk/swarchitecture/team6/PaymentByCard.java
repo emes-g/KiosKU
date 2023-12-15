@@ -8,14 +8,6 @@ public class PaymentByCard extends Payment {
 		this.insertedCardID = "카드 정보없음\n";
 	}
 
-	public String getInsertedCardID() {
-		return insertedCardID;
-	}
-
-	public void setInsertedCardID(String insertedCardID) {
-		this.insertedCardID = insertedCardID;
-	}
-
 	public String getUserPaymentMethod() {
 		String paymentMethod;
 		
@@ -65,5 +57,12 @@ public class PaymentByCard extends Payment {
 		protectedCardID += cardID.substring(12, 16);
 		
 		return protectedCardID;
+	}
+	
+	public String getInsertedCardID() {
+		return insertedCardID;
+	}	
+	public void setInsertedCardID(String insertedCardID) {
+		this.insertedCardID = insertedCardID;
 	}
 }

@@ -13,15 +13,6 @@ public class OrderManager {
 		orderList.add(new Order(0));	// 깡통
 		currentOrderNum = 0;
 	}
-	public ArrayList<Order> getOrderList() {
-		return orderList;
-	}
-	public int getCurrentOrderNum() {
-		return currentOrderNum;
-	}
-	public void setCurrentOrderNum(int currentOrderNum) {
-		this.currentOrderNum = currentOrderNum;
-	}
 	
 	public void makeOrder() {
 		Order basket = new Order(++currentOrderNum);
@@ -48,7 +39,6 @@ public class OrderManager {
 		}
 		// make order
 		orderList.add(basket);
-//		basket.printOrderInfo();
 	}
 	
 	public boolean addOrDeleteItem(Order basket, String command) {
@@ -76,5 +66,15 @@ public class OrderManager {
 	
 	public Order getLastOrder() {
 		return orderList.get(currentOrderNum);
+	}
+	
+	public ArrayList<Order> getOrderList() {
+		return orderList;
+	}
+	public int getCurrentOrderNum() {
+		return currentOrderNum;
+	}
+	public void setCurrentOrderNum(int currentOrderNum) {
+		this.currentOrderNum = currentOrderNum;
 	}
 }

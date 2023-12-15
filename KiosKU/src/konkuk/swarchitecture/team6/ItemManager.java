@@ -11,9 +11,6 @@ public class ItemManager {
 		itemList.add(new Item("케이크", 25000));
 		itemList.add(new Item("치킨", 20000));
 	}
-	public ArrayList<Item> getItemList() {
-		return itemList;
-	}
 	
 	public boolean addItem() {
 		String title = inputItemTitle();
@@ -76,11 +73,16 @@ public class ItemManager {
 
 		return cost;
 	}
+	
 	public boolean isExistedItem(String title) {
 		for(Item it : itemList) {
 			if(it.getTitle().equals(title))
 				return true;
 		}
 		return false;
+	}
+	
+	public ArrayList<Item> getItemList() {
+		return itemList;
 	}
 }

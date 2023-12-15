@@ -13,40 +13,33 @@ public abstract class Payment {
 		this.paymentInfo = "영수증 정보없음\n";
 	}
 	
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public boolean isPayable() {
-		return payable;
-	}
-
-	public void setPayable(boolean payable) {
-		this.payable = payable;
-	}
-
-	public boolean isSuccessed() {
-		return successed;
-	}
-
-	public void setSuccessed(boolean successed) {
-		this.successed = successed;
-	}
-
-	public String getPaymentInfo() {
-		return paymentInfo;
-	}
-
-	public void setPaymentInfo(String paymentInfo) {
-		this.paymentInfo = paymentInfo;
-	}
-
 	public abstract boolean payPreProcessing();
 	public abstract void pay();
 	public abstract void revert();
 	public abstract void makePaymentInfo();
+	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public boolean isPayable() {
+		return payable;
+	}
+	public void setPayable(boolean payable) {
+		this.payable = payable;
+	}
+	public boolean isSuccessed() {
+		return successed;
+	}
+	public void setSuccessed(boolean successed) {
+		this.successed = successed;
+	}
+	public String getPaymentInfo() {
+		return paymentInfo;
+	}
+	public void setPaymentInfo(String paymentInfo) {
+		this.paymentInfo = paymentInfo;
+	}
 }
