@@ -56,12 +56,19 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 		
 		// 더치페이하는 모든 인원들이 결제 가능한 상태인지 검사
 		for(int i=0; i<headcount; i++) {
-			if(!paymentList[i].payPreProcessing())
+			if(!paymentList[i].payPreProcessing()) {
+				revert(i);
 				return;
+			}
 		}
 		
 		// 실제 결제 수행
 		pManager.pay();
 		return;
+	}
+	
+	public void revert(int idx) {
+		for(int i=idx; i>=0; i--)
+			paymentList[i].revert();
 	}
 }

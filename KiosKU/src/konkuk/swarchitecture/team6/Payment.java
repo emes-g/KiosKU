@@ -47,4 +47,5 @@ public abstract class Payment {
 
 	public abstract boolean payPreProcessing();
 	public abstract void pay();
+	public abstract void revert();
 }

@@ -30,4 +30,10 @@ public class PaymentByCash extends Payment {
 		CurrencyManager.changeCurrencyReserve(insertedCurrency, change);
 		System.out.printf("결제 완료 | 결제 금액 : %d\n", price);
 	}
+	
+	@Override
+	public void revert() {
+		CurrencyManager.giveBackInsertedCurrency();
+		System.out.printf("가승인 취소 | 취소 금액 : %d\n", price);
+	}
 }

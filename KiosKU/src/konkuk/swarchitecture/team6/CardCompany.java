@@ -18,6 +18,15 @@ public class CardCompany {
 		return false;
 	}
 	
+	public static void cancelPreAuthorization(String insertedCardID, int price) {
+		for (CardInformation cardInfo : CardDatabase) {
+		    if(insertedCardID.equals(cardInfo.getCardID())) {
+		    	cardInfo.setPreAuthorized(cardInfo.getPreAuthorized() - price);
+		    	return;
+		    }
+		}
+	}
+	
 	public static void changeCardData(String insertedCardID, int price) {
 		for (CardInformation cardInfo : CardDatabase) {
 			// 실승인에 따른 가승인 제거

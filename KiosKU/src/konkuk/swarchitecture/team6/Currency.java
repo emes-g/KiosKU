@@ -22,22 +22,40 @@ public class Currency {
 		}
 	}
 	
+	public void bzero() {
+		for(int i=0; i<Kiosk.CURRENCY_NUM; i++)
+			units[i] = 0;
+		total = 0;
+	}
+	
 	// a.copy(b) = copy b to a
 	public void copy(Currency currency) {
 		for(int i=0; i<Kiosk.CURRENCY_NUM; i++)
-			units[i] = currency.getUnits()[i];
+			units[i] = currency.units[i];
+		total = currency.total;
 	}
 	
 	// a.add(b) = add b to a
 	public void add(Currency currency) {
 		for(int i=0; i<Kiosk.CURRENCY_NUM; i++)
-			units[i] += currency.getUnits()[i];
+			units[i] += currency.units[i];
+		total += currency.total;
 	}
 	
 	// a.sub(b) = sub b from a
 	public void sub(Currency currency) {
 		for(int i=0; i<Kiosk.CURRENCY_NUM; i++)
 			units[i] -= currency.getUnits()[i];
+		total -= currency.total;
+	}
+	
+	public void print() {
+		for(int i=0; i<Kiosk.CURRENCY_NUM; i++) {
+			if(i == Kiosk.CURRENCY_NUM / 2)
+				System.out.println();
+			System.out.printf("%d원 : %d개\t", Kiosk.UNITS[i], units[i]);
+		}
+		System.out.println();
 	}
 
 	public int[] getUnits() {

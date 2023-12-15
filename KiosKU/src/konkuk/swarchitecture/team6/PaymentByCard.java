@@ -46,4 +46,10 @@ public class PaymentByCard extends Payment {
 		CardCompany.changeCardData(insertedCardID, price);
 		System.out.printf("결제 완료 | 카드 번호 : %s\n", insertedCardID);
 	}
+
+	@Override
+	public void revert() {
+		CardCompany.cancelPreAuthorization(insertedCardID, price);
+		System.out.printf("가승인 취소 | 카드 번호 : %s\n", insertedCardID);
+	}
 }
