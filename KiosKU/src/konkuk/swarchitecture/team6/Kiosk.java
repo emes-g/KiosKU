@@ -1,47 +1,88 @@
 package konkuk.swarchitecture.team6;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Kiosk {
-	static Scanner scan = new Scanner(System.in);
 	static final int MAX_HEADCOUNT = 6;	// 최대 결제 가능 인원 수
 	static final int MIN_UNIT_COST = 100;	// 상품 최소 금액 단위
 	static final int CURRENCY_NUM = 8;	// 화폐 종류 수 
 	static final int[] UNITS = {50000, 10000, 5000, 1000, 500, 100, 50, 10};	// 현금 단위
-	private ArrayList<String> pList;
-	private Order basket;
+	static Scanner scan = new Scanner(System.in);
+	private static String ownerPW = "1234";
 	private ItemManager iManager;
 	private OrderManager oManager;
 	private PaymentManagerIF pManagerProxy;
 	private ReceiptManager rManager;
 	private CurrencyManager cManager;
 	private boolean isManagerMode;
-	private String ownerPW;
 	
-	public Kiosk(ArrayList<String> pList, Order basket, ItemManager iManager, OrderManager oManager, 
-			PaymentManagerIF pManagerProxy, ReceiptManager rManager, CurrencyManager cManager, 
-			boolean isManagerMode, String ownerPW) {
-		// 키오스크 키면 현금 보유량부터 입력받기
-		this.pList = pList;
-		this.basket = basket;
-		this.iManager = iManager;
-		this.oManager = oManager;
-		this.pManagerProxy = pManagerProxy;
-		this.rManager = rManager;
-		this.cManager = cManager;
-		this.isManagerMode = isManagerMode;
-		this.ownerPW = ownerPW;
+	public Kiosk() {}
+	
+	public boolean init() {
+		if(!isOwner()) {
+			System.out.printf("관리자가 아닙니다.");
+			return false;
+		}
+		this.iManager = new ItemManager();
+		this.oManager = new OrderManager(iManager);
+		this.rManager = new ReceiptManager(oManager);
+		this.cManager = new CurrencyManager();
+		this.isManagerMode = true;
+		
+		// 일단 여기
+		CardCompany.getCardDatabase().add(new CardInformation("aaaabbbbccccdddd", 1000000, 0, 100));
+		return true;
+	}
+	
+	public boolean isOwner() {
+		String pw;
+		
+		System.out.printf("키오스크 비밀번호 입력 : ");
+		pw = scan.nextLine();
+		
+		return ownerPW.equals(pw);
 	}
 
-	public ArrayList<String> getpList() {
-		return pList;
+	public void order() {
+		oManager.makeOrder();
 	}
 
-	public Order getBasket() {
-		return basket;
+	public void pay() {
+		pManagerProxy = new PaymentManagerProxy(oManager.getLastOrder().getTotalPrice());
+		
+		if(!pManagerProxy.pay()) {
+			System.out.printf("결제 실패\n");
+			return;
+		}
+		
+		rManager.makeReceipts(pManagerProxy);
 	}
-
+	
+	public boolean setItem(int option) {
+		if(!isManagerMode) {
+			System.out.printf("접근 권한이 없습니다.\n");
+			return false;
+		}
+	
+		switch (option) {
+		case 1:
+			iManager.addItem();
+			return true;
+		case 2:
+			iManager.editItem();
+			return true;
+		case 3:
+			iManager.deleteItem();
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static void clearBuffer() {
+		scan.nextLine();
+	}
+	
 	public ItemManager getiManager() {
 		return iManager;
 	}
@@ -60,29 +101,5 @@ public class Kiosk {
 	
 	public CurrencyManager getcManager() {
 		return cManager;
-	}
-
-	public boolean order() {
-		// 추후 구현
-		return false;
-	}
-
-	public boolean pay() {
-		// 추후 구현
-		return false;
-	}
-	
-	public boolean checkPayable() {
-		// 추후 구현
-		return false;
-	}
-	
-	public boolean setItem(int option) {
-		// 추후 구현
-		return false;
-	}
-	
-	public static void clearBuffer() {
-		scan.nextLine();
 	}
 }

@@ -50,7 +50,7 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 	}
 
 	// payPreProcessing 역할 (Kiosk가 호출)
-	public void pay() {
+	public boolean pay() {
 		// 결제 금액 계산
 		int[] prices = calculateAmount();
 		
@@ -64,13 +64,13 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 		for(int i=0; i<headcount; i++) {
 			if(!paymentList[i].payPreProcessing()) {
 				revert(i);
-				return;
+				return false;
 			}
 		}
 		
 		// 실제 결제 수행
 		pManager.pay();
-		return;
+		return true;
 	}
 	
 	public void revert(int idx) {

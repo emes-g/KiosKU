@@ -8,11 +8,15 @@ public class PaymentManager implements PaymentManagerIF {
 	}
 
 	@Override
-	public void pay() {
+	public boolean pay() {
 		for(int i=0; i<paymentList.length; i++) {
-			if(paymentList[i] == null)
-				return;
+			if(paymentList[i] == null) {
+				if(i == 0)
+					return false;
+				return true;
+			}
 			paymentList[i].pay();
 		}
+		return true;
 	}
 }

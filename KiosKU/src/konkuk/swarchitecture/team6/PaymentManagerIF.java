@@ -1,5 +1,5 @@
 package konkuk.swarchitecture.team6;
 
 public interface PaymentManagerIF {
-	public abstract void pay();
+	public abstract boolean pay();
 }
