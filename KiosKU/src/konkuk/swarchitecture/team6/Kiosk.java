@@ -2,9 +2,6 @@ package konkuk.swarchitecture.team6;
 
 import java.util.Scanner;
 
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-
 public class Kiosk {
 	KioskView view = KioskView.getInstance();
 
@@ -36,8 +33,19 @@ public class Kiosk {
 	}
 
 	public boolean init() {
-		while(!isOwner())
-			view.showMessagePopup("관리자가 아닙니다.", "알림");
+		int ownerCode;
+		
+		while(true) {
+			ownerCode = getOwnerCode();
+			if(ownerCode == -1) {
+				view.showMessagePopup("프로그램을 종료합니다.", "알림");
+				System.exit(0);
+			}
+			else if(ownerCode == 0)
+				view.showMessagePopup("비밀번호가 틀렸습니다.", "알림");
+			else
+				break;
+		}
 
 		this.iManager = new ItemManager();
 		this.oManager = new OrderManager(iManager);
@@ -47,10 +55,14 @@ public class Kiosk {
 		return true;
 	}
 
-	public boolean isOwner() {
+	public int getOwnerCode() {
 		String pw = view.getPW(view);
-
-		return ownerPW.equals(pw);
+		
+		if(pw == null)	// 취소(X)버튼 눌렀을 때
+			return -1;
+		else if(!ownerPW.equals(pw))	// 비밀번호 틀렸을 때
+			return 0;
+		return 1;	// 비밀번호 맞았을 때
 	}
 
 	public void run() {
@@ -75,14 +87,20 @@ public class Kiosk {
 	}
 
 	public boolean setItem() {
-		if(!isOwner()) {
-			view.showMessagePopup("비밀번호가 다릅니다.", "알림");
-			return false;
+		int ownerCode;
+		
+		while(true) {
+			ownerCode = getOwnerCode();
+			
+			if(ownerCode == -1)	// 취소 키
+				return false;
+			else if(ownerCode == 0)
+				view.showMessagePopup("비밀번호가 틀렸습니다.", "알림");
+			else {
+				view.itemWindow(iManager);
+				return true;
+			}
 		}
-
-		view.itemWindow(iManager);
-
-		return false;
 	}
 
 	public ItemManager getiManager() {
