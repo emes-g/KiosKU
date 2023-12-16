@@ -29,8 +29,6 @@ public class Kiosk {
 		this.cManager = new CurrencyManager();
 		this.isManagerMode = true;
 		
-		// 일단 여기
-		CardCompany.getCardDatabase().add(new CardInformation("aaaabbbbccccdddd", 1000000, 0, 100));
 		return true;
 	}
 	

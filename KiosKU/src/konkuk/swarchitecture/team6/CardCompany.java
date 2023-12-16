@@ -3,7 +3,7 @@ package konkuk.swarchitecture.team6;
 import java.util.ArrayList;
 
 public class CardCompany {
-	private static ArrayList<CardInformation> CardDatabase = new ArrayList<CardInformation>();
+	private static ArrayList<CardInformation> CardDatabase = CardInformationDAO.generateCardDatabase();
 	
 	public static boolean checkPayable(String insertedCardID, int price) {		
 		for (CardInformation cardInfo : CardDatabase) {

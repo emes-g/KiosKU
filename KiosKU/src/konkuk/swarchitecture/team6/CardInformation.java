@@ -1,5 +1,6 @@
 package konkuk.swarchitecture.team6;
 
+// DTO(Data Transfer Object) Class
 public class CardInformation {
 	private String cardID;	// 카드 번호
 	private int cardLimit;	// 카드 한도
