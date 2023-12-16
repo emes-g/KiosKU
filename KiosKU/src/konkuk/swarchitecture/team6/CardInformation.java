@@ -6,7 +6,7 @@ public class CardInformation {
 	private int cardLimit;	// 카드 한도
 	private int preAuthorized;	// 카드 가승인 금액
 	private int currentUsed;	// 현재 사용액
-	
+
 	public CardInformation(String cardID, int cardLimit, int preAuthorized, int currentUsed) {
 		this.cardID = cardID;
 		this.cardLimit = cardLimit;

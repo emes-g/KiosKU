@@ -3,7 +3,7 @@ package konkuk.swarchitecture.team6;
 public class Pair<X, Y> {
 	private X x;
 	private Y y;
-	
+
 	public Pair(X x, Y y) {
 		this.x = x;
 		this.y = y;
@@ -19,10 +19,5 @@ public class Pair<X, Y> {
 	}
 	public void setY(Y y) {
 		this.y = y;
-	}
-	
-	public void print() {
-		System.out.println(x.getClass().getName());
-		System.out.println(y.getClass().getName());
 	}
 }

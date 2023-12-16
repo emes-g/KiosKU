@@ -8,7 +8,7 @@ public class DBConn {
 	public static Connection getConnection() throws Exception{
 		// 1. 드라이버 로딩
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		
+
 		// 2. DB 연결
 		String url = "jdbc:mysql://127.0.0.1/?userSSL=false&user=root&password=0000";
 		return DriverManager.getConnection(url);

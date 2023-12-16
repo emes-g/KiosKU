@@ -10,27 +10,27 @@ public class CardInformationDAO {
 	private static Connection conn = null;
 	private static Statement stmt = null;
 	private static ResultSet rs = null;
-	
-	public static ArrayList<CardInformation> generateCardDatabase() {
+
+	public static ArrayList<CardInformation> getCardInfoFromCardDB() {
 		ArrayList<CardInformation> CardDatabase = new ArrayList<CardInformation>();
-		
+
 		try {
 			// 드라이버 로딩, DB 연결, SQL문 실행을 위한 Statement 객체 획득
 			conn = DBConn.getConnection();
 			stmt = conn.createStatement();
-			
+
 			// SQL문 작성 및 실행
 			String kioskDB = "use kiosk";
 			stmt.executeUpdate(kioskDB);
-			
-			String cardInfoTB = "select * from cardInformation";
-			rs = stmt.executeQuery(cardInfoTB);
+
+			String cardTB = "select * from cards";
+			rs = stmt.executeQuery(cardTB);
 			while(rs.next()) {
 				String cardID = rs.getString("cardID");
 				int cardLimit = rs.getInt("cardLimit");	
 				int preAuthorized = rs.getInt("preAuthorized");
 				int currentUsed = rs.getInt("currentUsed");
-				
+
 				CardDatabase.add(new CardInformation(cardID, cardLimit, preAuthorized, currentUsed));
 			}
 		} 

@@ -2,7 +2,7 @@ package konkuk.swarchitecture.team6;
 
 public class CurrencyManager {
 	KioskView view = KioskView.getInstance();
-	
+
 	private static Currency currencyReserve = new Currency();
 	private static Currency subCurrencyReserve = new Currency();
 	private static Currency tiedReserve = new Currency();
@@ -11,15 +11,14 @@ public class CurrencyManager {
 		view.showMessagePopup("키오스크의 현금보유량을 입력해주세요.", "알림");
 		currencyReserve.init();
 		view.showMessagePopup("현금보유량 설정 완료.", "알림");
-		//view.setLabel(currencyReserve.toString());
 	}
-	
+
 	// change to Currency
 	public static boolean checkPayable(int changeAmount, Currency insertedCurrency, Currency change) {		
 		subCurrencyReserve.copy(currencyReserve);
 		subCurrencyReserve.add(insertedCurrency);
 		subCurrencyReserve.sub(tiedReserve);
-		
+
 		int rest = changeAmount;
 		for(int i=0; i<Kiosk.CURRENCY_NUM; i++) {
 			int cnt = rest / Kiosk.UNITS[i]; 
@@ -37,13 +36,11 @@ public class CurrencyManager {
 		tiedReserve.add(change);
 		return true;
 	}
-	
+
 	public static void giveBackInsertedCurrency() {
-//		tiedReserve.print();
 		tiedReserve.bzero();
-//		tiedReserve.print();
 	}
-	
+
 	public static void changeCurrencyReserve(Currency insertedCurrency, Currency change) {
 		currencyReserve.add(insertedCurrency);
 		currencyReserve.sub(change);

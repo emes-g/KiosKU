@@ -8,7 +8,7 @@ public class Order {
 	private int totalPrice;
 	private int orderNum;
 	private boolean forHere;
-	
+
 	public Order(int orderNum) {
 		this.orderNum = orderNum;
 		basket = new ArrayList<Pair<Item, Integer>>();
@@ -16,33 +16,33 @@ public class Order {
 		totalPrice = 0;
 		forHere = false;
 	}
-	
-	
+
+
 	public void addItemToBasket(Item item, Integer count) {
 		ArrayList<String> names = getItemNameInBasket();
 		int index = getIndexOfItem(names, item);
-		
+
 		if(index == -1)	// 해당 상품이 장바구니에 없는 경우 
 			basket.add(new Pair<>(item, count));
 		else {	// 해당 상품이 장바구니에 있는 경우
 			Pair<Item, Integer> p = basket.get(index);
 			p.setY(p.getY() + count);
 		}
-		
+
 		totalCount += count;
 		totalPrice += (item.getCost() * count);
 	}
-	
+
 	public void deleteItemFromBasket(Item item, Integer count) {
 		ArrayList<String> names = getItemNameInBasket();
 		int index = getIndexOfItem(names, item);
-		
+
 		// 해당 상품이 장바구니에 없는 경우
 		if(index == -1) {
 			System.out.printf("장바구니에 %s이(가) 존재하지 않습니다.\n", item.getTitle());
 			return;
 		}
-		
+
 		// 해당 상품이 장바구니에 있는 경우
 		Pair<Item, Integer> p = basket.get(index);
 		int num = p.getY() - count;
@@ -56,17 +56,16 @@ public class Order {
 			return;
 		}
 	}
-	
+
 	public ArrayList<String> getItemNameInBasket() {
 		ArrayList<String> names = new ArrayList<String>();
-		
-		for(Pair<Item, Integer> p : basket) {
+
+		for(Pair<Item, Integer> p : basket)
 			names.add(p.getX().getTitle());
-		}
-		
+
 		return names;
 	}
-	
+
 	public int getIndexOfItem(ArrayList<String> names, Item item) {
 		for(int i=0; i<names.size(); i++) {
 			if(item.getTitle().equals(names.get(i)))
