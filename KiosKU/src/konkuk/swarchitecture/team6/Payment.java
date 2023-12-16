@@ -4,11 +4,13 @@ public abstract class Payment {
 	protected int price;	// 1인 부담액
 	protected boolean payable;
 	protected String paymentInfo;	// 결제 정보
+	protected int num;
 	
-	public Payment(int price) {
+	public Payment(int price, int num) {
 		this.price = price;
 		this.payable = false;
 		this.paymentInfo = "영수증 정보없음\n";
+		this.num = num;
 	}
 	
 	public abstract boolean payPreProcessing();
@@ -33,5 +35,8 @@ public abstract class Payment {
 	}
 	public void setPaymentInfo(String paymentInfo) {
 		this.paymentInfo = paymentInfo;
+	}
+	public int getNum() {
+		return num;
 	}
 }

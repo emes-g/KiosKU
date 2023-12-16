@@ -3,6 +3,8 @@ package konkuk.swarchitecture.team6;
 import java.util.ArrayList;
 
 public class OrderManager {
+	KioskView view = KioskView.getInstance();
+	
 	private ArrayList<Order> orderList;
 	private int currentOrderNum;
 	private ItemManager iManager;
@@ -15,30 +17,39 @@ public class OrderManager {
 	}
 	
 	public void makeOrder() {
-		Order basket = new Order(++currentOrderNum);
 		boolean forHere;
+		forHere = view.selectForHereOrToGo();
+		
+		
+		Order basket = new Order(++currentOrderNum);
+		//boolean forHere;
 		
 		System.out.printf("%d번째 주문을 시작합니다.\n", currentOrderNum);
-		System.out.printf("매장 식사 | 포장 선택 (true, false): ");
-		forHere = Kiosk.scan.nextBoolean();
-		Kiosk.clearBuffer();
+		
+		//System.out.printf("매장 식사 | 포장 선택 (true, false): ");
+		//forHere = view.selectForHereOrToGo();
+		//Kiosk.clearBuffer();
 		basket.selectForHereOrToGo(forHere);
 		
-		while(true) {
+		view.orderWindow(this, basket);
+		
+		//view.showMessagePopup("화면 전환", "알림");
+		
+		//while(true) {
 			String command;
 			
 			System.out.printf("상품 관련 명령 선택 (add, delete, q): ");
-			command = Kiosk.scan.nextLine();
+			//command = Kiosk.scan.nextLine();
 			// 종료
-			if(command.equals("q")) {
-				System.out.printf("상품 추가 종료\n");
-				break;
-			}
+			//if(command.equals("q")) {
+			//	System.out.printf("상품 추가 종료\n");
+			//	break;
+			//}
 			// add or delete
-			addOrDeleteItem(basket, command);
-		}
+			//addOrDeleteItem(basket, command);
+		//}
 		// make order
-		orderList.add(basket);
+		//orderList.add(basket);
 	}
 	
 	public boolean addOrDeleteItem(Order basket, String command) {
@@ -76,5 +87,8 @@ public class OrderManager {
 	}
 	public void setCurrentOrderNum(int currentOrderNum) {
 		this.currentOrderNum = currentOrderNum;
+	}
+	public ItemManager getItemManager() {
+		return iManager;
 	}
 }

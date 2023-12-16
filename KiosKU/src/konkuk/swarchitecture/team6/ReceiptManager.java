@@ -3,6 +3,8 @@ package konkuk.swarchitecture.team6;
 import java.util.ArrayList;
 
 public class ReceiptManager {
+	KioskView view = KioskView.getInstance();
+	
 	private OrderManager oManager;
 	private PaymentManagerProxy pManager;
 	private ArrayList<ArrayList<Receipt>> receiptList;
@@ -26,27 +28,28 @@ public class ReceiptManager {
 		String receiptInfo;
 		Receipt receipt;
 		
-		receiptInfo = String.format("========영수증========\n");
+		receiptInfo = String.format("===============영수증===============\n");
 		receiptInfo += String.format("주문번호 : %d\n", oManager.getCurrentOrderNum());
 		receiptInfo += String.format("결제 인원 수 : %d\n", pManager.getHeadcount());
 		receiptInfo += String.format("결제자  순서 : %d\n", idx + 1);
-		receiptInfo += String.format("--------------------\n");
+		receiptInfo += String.format("------------------------------------------------------------\n");
 		receiptInfo += String.format("<메뉴>\n");
 		for(int i=0; i<basket.size(); i++) {
 			Item item = basket.get(i).getX();
 			Integer cnt = basket.get(i).getY();
 			
-			receiptInfo += String.format("%s: %d개 %d원\n", item.getTitle(), cnt, item.getCost() * cnt);
+			receiptInfo += String.format("%s X %d개   %d원\n", item.getTitle(), cnt, item.getCost() * cnt);
 		}
 		receiptInfo += String.format("합계 : %d원\n", oManager.getLastOrder().getTotalPrice());
-		receiptInfo += String.format("--------------------\n");
+		receiptInfo += String.format("------------------------------------------------------------\n");
 		receiptInfo += String.format(pManager.getPaymentList()[idx].getPaymentInfo());
-		receiptInfo += String.format("--------------------\n");
-		receiptInfo += String.format("====================\n\n");
+		receiptInfo += String.format("------------------------------------------------------------\n");
+		receiptInfo += String.format("===================================\n\n");
 		
 		receipt = new Receipt(receiptInfo);
 		receipts.add(receipt);
-		System.out.printf(receipt.getReceiptInfo());
+		//System.out.printf(receipt.getReceiptInfo());
+		view.displayReceipt(receipt, idx + 1);
 	}
 	
 	public ArrayList<Receipt> getLastReceipts() {

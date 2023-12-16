@@ -12,36 +12,29 @@ public class ItemManager {
 		itemList.add(new Item("치킨", 20000));
 	}
 	
-	public boolean addItem() {
-		String title = inputItemTitle();
-		int cost = inputItemCost();
+	public boolean addItem(String title, int cost) {
+		//String title = inputItemTitle();
+		//int cost = inputItemCost();
 		Item item = new Item(title, cost);
 		
-		if(isExistedItem(title))
+		if(isExistedItem(title, -1))
 			return false;
-		
 		itemList.add(item);
 		return true;
 	}
-	public boolean editItem() {
-		int idx = inputItemIdx();
+	public boolean editItem(String title, int cost, int idx) {
+		//int idx = inputItemIdx();
 		Item item = itemList.get(idx);
 		
-		while(true) {
-			String title = inputItemTitle();
-			
-			if(!isExistedItem(title)) {
-				item.setTitle(inputItemTitle());
-				break;
-			}
-			System.out.printf("중복된 이름입니다. 다른 이름을 입력해주세요\n");
+		if(!isExistedItem(title, idx)) {
+			item.setTitle(title);
+			item.setCost(cost);
+			return true;
 		}
-		item.setCost(inputItemCost());
-		
-		return true;
+		return false;
 	}
-	public boolean deleteItem() {
-		int idx = inputItemIdx();
+	public boolean deleteItem(int idx) {
+		//int idx = inputItemIdx();
 		
 		itemList.remove(idx);
 		
@@ -74,9 +67,9 @@ public class ItemManager {
 		return cost;
 	}
 	
-	public boolean isExistedItem(String title) {
-		for(Item it : itemList) {
-			if(it.getTitle().equals(title))
+	public boolean isExistedItem(String title, int idx) {
+		for(int i = 0; i < itemList.size(); i++) {
+			if(itemList.get(i).getTitle().equals(title) && i != idx)
 				return true;
 		}
 		return false;

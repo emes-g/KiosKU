@@ -1,6 +1,8 @@
 package konkuk.swarchitecture.team6;
 
 public class PaymentManagerProxy implements PaymentManagerIF { 
+	KioskView view = KioskView.getInstance();
+	
 	private int totalPrice;
 	private int headcount;
 	private Payment[] paymentList;
@@ -17,8 +19,10 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 	public int[] calculateAmount() {
 		// 결제 인원 수 입력
 		System.out.printf("결제 인원 수 입력 : ");
-		headcount = Kiosk.scan.nextInt();
-		Kiosk.clearBuffer();
+		//headcount = Kiosk.scan.nextInt();
+		//Kiosk.clearBuffer();
+		
+		headcount = view.inputHeadcount();
 		
 		int[] prices = new int[headcount];
 		int mod = totalPrice % (headcount * Kiosk.MIN_UNIT_COST);
@@ -31,6 +35,7 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 			}		
 		}
 		
+		view.showPaymentInfo(headcount, prices);
 		return prices;
 	}
 
@@ -40,8 +45,8 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 		
 		// 더치페이하는 인원들의 결제 목록 생성
 		for(int i=0; i<headcount; i++) {
-			PaymentFactory paymentFactory = PaymentFactory.getFactory();
-			paymentList[i] = paymentFactory.createPayment(prices[i]);
+			PaymentFactory paymentFactory = PaymentFactory.getFactory(i + 1);
+			paymentList[i] = paymentFactory.createPayment(prices[i], i + 1);
 		}
 		
 		// 더치페이하는 모든 인원들이 결제 가능한 상태인지 검사

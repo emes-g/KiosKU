@@ -1,6 +1,8 @@
 package konkuk.swarchitecture.team6;
 
 public class Currency {
+	KioskView view = KioskView.getInstance();
+	
 	private int total;
 	private int[] units;
 	
@@ -11,10 +13,15 @@ public class Currency {
 	
 	// setUnits & setTotal
 	public void init() {
+		int[] input = null;
+		while(input == null) {
+			input = view.inputCurrency();
+		}
+		
 		for(int i=0; i<Kiosk.CURRENCY_NUM; i++) {
-			System.out.printf("%d원 개수 : ", Kiosk.UNITS[i]);
-			units[i] = Kiosk.scan.nextInt();	
-			Kiosk.clearBuffer();
+			//System.out.printf("%d원 개수 : ", Kiosk.UNITS[i]);
+			units[i] = input[i];	
+			//Kiosk.clearBuffer();
 		}
 		updateTotal();
 	}
@@ -53,6 +60,10 @@ public class Currency {
 			System.out.printf("%d원 : %d개\t", Kiosk.UNITS[i], units[i]);
 		}
 		System.out.println();
+	}
+	
+	public void show(String message, String title) {
+		view.displayCurrency(this, message, title);
 	}
 	
 	public void updateTotal() {

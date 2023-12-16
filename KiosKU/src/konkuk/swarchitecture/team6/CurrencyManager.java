@@ -1,12 +1,17 @@
 package konkuk.swarchitecture.team6;
 
 public class CurrencyManager {
+	KioskView view = KioskView.getInstance();
+	
 	private static Currency currencyReserve = new Currency();
 	private static Currency subCurrencyReserve = new Currency();
 	private static Currency tiedReserve = new Currency();
 
 	public CurrencyManager() {
+		view.showMessagePopup("키오스크의 현금보유량을 입력해주세요.", "알림");
 		currencyReserve.init();
+		view.showMessagePopup("현금보유량 설정 완료.", "알림");
+		//view.setLabel(currencyReserve.toString());
 	}
 	
 	// change to Currency
