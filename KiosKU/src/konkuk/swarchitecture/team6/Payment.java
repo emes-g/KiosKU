@@ -1,4 +1,4 @@
-package konkuk.swarchitecture.team6.cli;
+package konkuk.swarchitecture.team6;
 
 public abstract class Payment {
 	protected int price;	// 1인 부담액

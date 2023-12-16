@@ -1,4 +1,4 @@
-package konkuk.swarchitecture.team6.cli;
+package konkuk.swarchitecture.team6;
 
 public class PaymentManagerProxy implements PaymentManagerIF { 
 	private int totalPrice;
