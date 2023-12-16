@@ -21,7 +21,6 @@ public class PaymentByCash extends Payment {
 			System.out.printf("키오스크에 화폐가 부족합니다.\n");
 			return false;
 		}
-		payable = true;
 		System.out.printf("선승인 완료 | 선승인 금액 : %d\n", price);
 		return true;
 	}
@@ -30,22 +29,15 @@ public class PaymentByCash extends Payment {
 	public void pay() {
 		CurrencyManager.changeCurrencyReserve(insertedCurrency, change);
 		makePaymentInfo();
+		// 거스름돈이 어떻게 구성되어있는지 출력
 		System.out.printf("결제 완료 | 결제 금액 : %d\n", price);
-		System.out.printf("<거스름돈>\n");
-		change.print();
-		System.out.printf("총액 : %d원\n", change.getTotal());
 	}
 	
 	@Override
 	public void revert(int idx) {
 		CurrencyManager.giveBackInsertedCurrency();
-		if(!payable) 
-			System.out.printf("%d번째 결제자 결제 실패\n", idx + 1);
-		else
-			System.out.printf("%d번째 결제자의 가승인 취소 | 취소 금액 : %d\n", idx + 1, price);
-		System.out.printf("<반환 금액>\n");
+		System.out.printf("%d번째 결제자의 가승인 취소 | 취소 금액 : %d\n", idx + 1, price);
 		insertedCurrency.print();
-		System.out.printf("총액 : %d원\n", insertedCurrency.getTotal());
 	}
 
 	@Override
