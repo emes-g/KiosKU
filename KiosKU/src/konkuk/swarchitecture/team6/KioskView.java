@@ -43,15 +43,15 @@ public class KioskView extends JFrame {
 	private static KioskView instance;
 
 	public static KioskView getInstance() {
-		if (instance == null) {
+		if (instance == null)
 			instance = new KioskView();
-		}
 		return instance;
 	}
 
 	public KioskView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 429);
+		setTitle("KiosKU");
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -330,7 +330,7 @@ public class KioskView extends JFrame {
 
 			if (inputValue == null)
 				// 사용자가 취소 버튼을 눌렀을 때
-				break;
+				return -1;
 
 			try {
 				// 유효한 숫자인지 확인
@@ -385,14 +385,16 @@ public class KioskView extends JFrame {
 	public String inputCardID() {
 		JPasswordField[] passwordFields = new JPasswordField[4];
 		JPanel panel = new JPanel(new FlowLayout());
-
+		int option = -1;
+		
 		for (int i = 0; i < passwordFields.length; i++) {
 			passwordFields[i] = new JPasswordField(4);
 			passwordFields[i].addKeyListener(new NumberInputKeyListener());
 			panel.add(passwordFields[i]);
 		}
 
-		int option = JOptionPane.showConfirmDialog(null, panel, "카드번호 입력", JOptionPane.DEFAULT_OPTION);
+		while(option == -1)
+			option = JOptionPane.showConfirmDialog(null, panel, "카드번호 입력", JOptionPane.DEFAULT_OPTION);
 
 		if (option == JOptionPane.OK_OPTION) {
 			// getPassword 메서드는 char[]을 반환하므로 String으로 변환
@@ -401,9 +403,9 @@ public class KioskView extends JFrame {
 				cardID += new String(passwordFields[i].getPassword());
 			}	
 			return cardID;
-		} else {
+		} 
+		else
 			return null;
-		}
 	}
 
 	// 숫자만 입력 가능하도록 하는 KeyListener 클래스

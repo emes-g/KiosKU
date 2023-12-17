@@ -19,6 +19,8 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 	public int[] calculateAmount() {
 		// 결제 인원 수 입력
 		headcount = view.inputHeadcount();
+		if(headcount == -1)
+			return null;
 
 		int[] prices = new int[headcount];
 		int mod = totalPrice % (headcount * Kiosk.MIN_UNIT_COST);
@@ -38,6 +40,8 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 	public boolean pay() {
 		// 결제 금액 계산
 		int[] prices = calculateAmount();
+		if(prices == null)
+			return false;
 
 		// 더치페이하는 인원들의 결제 목록 생성
 		for(int i=0; i<headcount; i++) {
