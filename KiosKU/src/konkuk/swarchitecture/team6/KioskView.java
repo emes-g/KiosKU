@@ -103,6 +103,10 @@ public class KioskView extends JFrame {
 						return null;
 					}
 				} catch (NumberFormatException e) {
+					if(coinFields[i].getText().length() == 0) {
+						coinCounts[i] = 0;
+						continue;
+					}
 					JOptionPane.showMessageDialog(null, "숫자를 입력해주세요.");
 					return null;
 				}
@@ -117,7 +121,7 @@ public class KioskView extends JFrame {
 		JOptionPane.showMessageDialog(null, strToHtml(message), title, JOptionPane.PLAIN_MESSAGE);
 	}
 
-	public boolean selectForHereOrToGo() {
+	public int selectForHereOrToGo() {
 		// 매장, 포장 여부를 나타내는 버튼 배열
 		Object[] options = {"매장", "포장"};
 
@@ -131,8 +135,9 @@ public class KioskView extends JFrame {
 				null,
 				options,
 				options[0]); // 기본 선택은 매장
-
-		return choice == 0; // 매장 선택일 경우 true, 포장 선택일 경우 false 반환
+	
+		// 취소 -1, 매장 0, 포장 1
+		return choice;
 	}
 
 	public void mainWindow() {

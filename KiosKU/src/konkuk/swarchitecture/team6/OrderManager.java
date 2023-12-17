@@ -17,12 +17,20 @@ public class OrderManager {
 	}
 
 	public void makeOrder() {
-		boolean forHere = view.selectForHereOrToGo();
 		Order basket = new Order(++currentOrderNum);
 
-		basket.selectForHereOrToGo(forHere);
-
-		view.orderWindow(this, basket);
+		switch(view.selectForHereOrToGo()) {
+		case -1:	// 취소 키
+			break;
+		case 0:		// 매장
+			basket.selectForHereOrToGo(true);
+			view.orderWindow(this, basket);
+			break;
+		case 1:		// 포장
+			basket.selectForHereOrToGo(false);
+			view.orderWindow(this, basket);
+			break;
+		}
 	}
 
 	public Order getLastOrder() {

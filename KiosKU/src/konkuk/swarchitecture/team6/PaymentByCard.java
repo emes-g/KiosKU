@@ -20,8 +20,10 @@ public class PaymentByCard extends Payment {
 			return false;
 		}
 		payable = true;
+		CardInformationDAO.updatePreAuthorized(insertedCardID, price, true);
 		view.showMessagePopup("선승인 완료 | 선승인 금액 : " + price + "원" + "\n카드 번호 : " + protectCardInfo(insertedCardID),
 				"결제자 " + num + " - 카드결제");
+		
 		return true;
 	}
 

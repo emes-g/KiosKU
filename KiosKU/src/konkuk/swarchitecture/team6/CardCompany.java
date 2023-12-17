@@ -22,6 +22,7 @@ public class CardCompany {
 		for (CardInformation cardInfo : CardDatabase) {
 			if(insertedCardID.equals(cardInfo.getCardID())) {
 				cardInfo.setPreAuthorized(cardInfo.getPreAuthorized() - price);
+				CardInformationDAO.updatePreAuthorized(insertedCardID, price, false);
 				return;
 			}
 		}
@@ -29,10 +30,13 @@ public class CardCompany {
 
 	public static void changeCardData(String insertedCardID, int price) {
 		for (CardInformation cardInfo : CardDatabase) {
-			// 실승인에 따른 가승인 제거
 			if(insertedCardID.equals(cardInfo.getCardID())) {
-				cardInfo.setCurrentUsed(cardInfo.getCurrentUsed() + price);
+				// 가승인 제거
 				cardInfo.setPreAuthorized(cardInfo.getPreAuthorized() - price);
+				CardInformationDAO.updatePreAuthorized(insertedCardID, price, false);
+				// 실승인
+				cardInfo.setCurrentUsed(cardInfo.getCurrentUsed() + price);
+				CardInformationDAO.updateCurrentUsed(insertedCardID, price);
 			}
 		}
 	}
