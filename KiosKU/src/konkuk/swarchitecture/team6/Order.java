@@ -38,10 +38,8 @@ public class Order {
 		int index = getIndexOfItem(names, item);
 
 		// 해당 상품이 장바구니에 없는 경우
-		if(index == -1) {
-			System.out.printf("장바구니에 %s이(가) 존재하지 않습니다.\n", item.getTitle());
+		if(index == -1)
 			return;
-		}
 
 		// 해당 상품이 장바구니에 있는 경우
 		Pair<Item, Integer> p = basket.get(index);
@@ -51,10 +49,8 @@ public class Order {
 			totalCount -= count;
 			totalPrice -= (p.getX().getCost() * count);
 		}
-		else {	// 개수가 부족한 경우
-			System.out.printf("%s는(은) 최대 %d개 뺄 수 있습니다.\n", item.getTitle(), p.getY());
+		else	// 개수가 부족한 경우
 			return;
-		}
 	}
 
 	public ArrayList<String> getItemNameInBasket() {
