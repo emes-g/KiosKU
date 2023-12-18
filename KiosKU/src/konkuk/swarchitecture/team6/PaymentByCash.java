@@ -42,7 +42,7 @@ public class PaymentByCash extends Payment {
 		if(!payable) 
 			view.showMessagePopup("결제 실패", "결제자 " + num + " - 현금결제");
 		else
-			view.showMessagePopup("가승인 취소 | 취소 금액 : " + price + "원", "결제자 " + num + " - 현금결제");
+			view.showMessagePopup("선승인 취소 | 취소 금액 : " + price + "원", "결제자 " + num + " - 현금결제");
 		insertedCurrency.show("투입금액을 반환합니다.",  "결제자 " + num + " - 현금결제");
 	}
 

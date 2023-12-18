@@ -4,7 +4,7 @@ package konkuk.swarchitecture.team6;
 public class CardInformation {
 	private String cardID;	// 카드 번호
 	private int cardLimit;	// 카드 한도
-	private int preAuthorized;	// 카드 가승인 금액
+	private int preAuthorized;	// 카드 선승인 금액
 	private int currentUsed;	// 현재 사용액
 
 	public CardInformation(String cardID, int cardLimit, int preAuthorized, int currentUsed) {

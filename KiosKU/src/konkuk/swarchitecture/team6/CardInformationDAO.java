@@ -60,7 +60,7 @@ public class CardInformationDAO {
 			String kioskDB = "use kiosk";
 			stmt.executeUpdate(kioskDB);
 			
-			// 현재 가승인 금액 불러오기
+			// 현재 선승인 금액 불러오기
 			String cardTB = "select * from cards where cardID=" + cardID;
 			rs = stmt.executeQuery(cardTB);		
 			while(rs.next())

@@ -42,7 +42,7 @@ public class PaymentByCard extends Payment {
 			return;
 		}
 		CardCompany.cancelPreAuthorization(insertedCardID, price);
-		view.showMessagePopup("가승인 취소 | 카드 번호 : " + protectCardInfo(insertedCardID), "결제자 " + num + " - 카드결제");
+		view.showMessagePopup("선승인 취소 | 카드 번호 : " + protectCardInfo(insertedCardID), "결제자 " + num + " - 카드결제");
 	}
 
 	@Override
