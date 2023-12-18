@@ -37,6 +37,7 @@ public class PaymentManagerProxy implements PaymentManagerIF {
 		return prices;
 	}
 
+	@Override
 	public boolean pay() {
 		// 결제 금액 계산
 		int[] prices = calculateAmount();

@@ -10,7 +10,8 @@ public class DBConn {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
 		// 2. DB 연결
-		String url = "jdbc:mysql://127.0.0.1/?userSSL=false&user=root&password=0000";
+		String url = String.format("jdbc:mysql://%s/?userSSL=false&user=%s&password=%s",
+				DBInfo.IP, DBInfo.USER, DBInfo.PASSWORD);
 		return DriverManager.getConnection(url);
 	}
 }
