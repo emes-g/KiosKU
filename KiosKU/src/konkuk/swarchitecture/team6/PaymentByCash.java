@@ -54,9 +54,8 @@ public class PaymentByCash extends Payment {
 		paymentInfo += "결제 금액 : " + price + "\n";
 		paymentInfo += "------------------------------------------------------------\n";
 		paymentInfo += "<거스름돈>\n";
-		for (int i = 0; i < Kiosk.CURRENCY_NUM; i++) {
+		for (int i = 0; i < Kiosk.CURRENCY_NUM; i++)
 			paymentInfo += (Kiosk.UNITS[i] + "원 X " + change.getUnits()[i] + "개\n");
-		}
 		paymentInfo += ("총 금액 : " + change.getTotal() + "원\n");
 	}
 }

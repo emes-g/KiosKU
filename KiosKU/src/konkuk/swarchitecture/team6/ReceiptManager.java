@@ -37,8 +37,9 @@ public class ReceiptManager {
 		for(int i=0; i<basket.size(); i++) {
 			Item item = basket.get(i).getX();
 			Integer cnt = basket.get(i).getY();
-
-			receiptInfo += String.format("%s X %d개   %d원\n", item.getTitle(), cnt, item.getCost() * cnt);
+			
+			if(cnt > 0)
+				receiptInfo += String.format("%s X %d개   %d원\n", item.getTitle(), cnt, item.getCost() * cnt);
 		}
 		receiptInfo += String.format("합계 : %d원\n", oManager.getLastOrder().getTotalPrice());
 		receiptInfo += String.format("------------------------------------------------------------\n");
