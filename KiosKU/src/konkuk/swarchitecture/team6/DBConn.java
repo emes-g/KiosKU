@@ -9,7 +9,7 @@ public class DBConn {
 		// 1. 드라이버 로딩
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
-		// 2. DB 연결
+		// 2. DB 연결 (DB 정보는 DBInfo 파일에 저장)
 		String url = String.format("jdbc:mysql://%s/?userSSL=false&user=%s&password=%s",
 				DBInfo.IP, DBInfo.USER, DBInfo.PASSWORD);
 		return DriverManager.getConnection(url);
