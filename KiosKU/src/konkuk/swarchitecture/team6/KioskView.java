@@ -607,30 +607,49 @@ public class KioskView extends JFrame {
 	private void addProduct(DefaultListModel<String> productList, JList<String> productListUI, 
 			JTextField titleField,JTextField priceField, ItemManager im) {
 		String title = titleField.getText();
-		String price = priceField.getText();
-		if (!title.isEmpty() && !price.isEmpty()) {
-			if(im.addItem(title, Integer.parseInt(price))) {
-				productList.addElement(title + " - " + price + "원");
-				clearFields(productListUI, titleField, priceField);
+		String priceStr = priceField.getText();
+		
+		if (!title.isEmpty() && !priceStr.isEmpty()) {
+			try {
+				int price = Integer.parseInt(priceStr);
+				
+				if(price <= 0)
+					showMessagePopup("상품 가격은 0원 이하일 수 없습니다.", "추가 실패");
+				else if(im.addItem(title, price)) {
+					productList.addElement(title + " - " + price + "원");
+					clearFields(productListUI, titleField, priceField);
+				}
+				else
+					showMessagePopup("동일한 상품명이 존재합니다.", "추가 실패");				
+			}catch (NumberFormatException nfe) {
+				showMessagePopup("상품 가격을 숫자로 입력해주세요.", "추가 실패");
 			}
-			else
-				showMessagePopup("동일한 상품명이 존재합니다.", "추가 실패");
 		}
 	}
 
 	private void updateProduct(DefaultListModel<String> productList, JList<String> productListUI, 
 			JTextField titleField,JTextField priceField, ItemManager im) {
 		int selectedIndex = productListUI.getSelectedIndex();
+		
 		if (selectedIndex != -1) {
 			String title = titleField.getText();
-			String price = priceField.getText();
-			if (!title.isEmpty() && !price.isEmpty()) {
-				if(im.editItem(title, Integer.parseInt(price), selectedIndex)) {
-					productList.setElementAt(title + " - " + price + "원", selectedIndex);
-					clearFields(productListUI, titleField, priceField);
+			String priceStr = priceField.getText();
+			
+			if (!title.isEmpty() && !priceStr.isEmpty()) {
+				try {
+					int price = Integer.parseInt(priceStr);
+					
+					if(price <= 0)
+						showMessagePopup("상품 가격은 0원 이하일 수 없습니다.", "수정 실패");
+					else if(im.editItem(title, price, selectedIndex)) {
+						productList.setElementAt(title + " - " + price + "원", selectedIndex);
+						clearFields(productListUI, titleField, priceField);
+					}
+					else
+						showMessagePopup("동일한 상품명이 존재합니다.", "수정 실패");
+				}catch (NumberFormatException nfe) {
+					showMessagePopup("상품 가격을 숫자로 입력해주세요.", "수정 실패");
 				}
-				else
-					showMessagePopup("동일한 상품명이 존재합니다.", "수정 실패");
 			}
 		}
 	}
