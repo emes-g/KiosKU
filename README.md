@@ -9,7 +9,7 @@ Java 17 환경에서 개발하였으며, Windows에서 실행할 수 있는 파�
 ## 👨🏻‍🤝‍👨🏻역할 분담
 - **최재현** : 팀장, 아키텍처 설계, 내부 로직, GUI 구현
 - **주민석** : 아키텍처 설계, 내부 로직, DB 구축
-- **김성수** : 초기 아키텍처 설계
+- **박성수** : 초기 아키텍처 설계
 
 ## 💻개발 환경
 - **Application Layer** : Java 17
@@ -17,4 +17,4 @@ Java 17 환경에서 개발하였으며, Windows에서 실행할 수 있는 파�
 - **Infra Layer** : Windows(OS), MySQL(DBMS)
 
 ## 🎞시연 영상
-![my_video](https://github.com/emes-g/KiosKU/issues/2#issue-2170722081)
+https://github.com/emes-g/KiosKU/assets/93303181/7a1c4964-e4e9-4ad0-bbcc-cd0ce3e22d87
